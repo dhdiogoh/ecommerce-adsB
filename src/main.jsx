@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import './styles/globalStyles.css'
+import './styles/styles.css'
 
 import { StrictMode } from "react";
 import { RouterProvider } from "react-router-dom";

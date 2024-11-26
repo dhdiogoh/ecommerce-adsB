@@ -1,0 +1,26 @@
+#root{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+}
+
+*{
+    text-decoration: none;
+}
+
+.cart{
+    position: absolute;
+    right: 10px;
+}
+
+.gb{
+    justify-content: center;
+    align-items: center;
+    width: 15rem;
+    flex-direction: column;
+}
+
+.redes{
+    width: 100%;
+}

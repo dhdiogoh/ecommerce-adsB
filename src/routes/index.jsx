@@ -1,12 +1,12 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Home from "../pages/shared/Home";
-import Register from "../pages/shared/register";
-import Login from "../pages/shared/login";
+import Register from "../pages/shared/Register"
+import Login from "../pages/shared/Login";
 import Cart from "../pages/client/Cart";
 import RegisterProducts from "../pages/admin/RegisterProducts";
 import ListOrders from "../pages/admin/ListOrders";
-import NotFound from "../pages/NotFound"; // Página de erro para acesso negado
-import ModAdmin from "../components/ModAdmin";
+import NotFound from "../pages/NotFound"; 
+import Admin from "../components/ModAdmin";
 
 const routes = createBrowserRouter([
 	{
@@ -23,42 +23,36 @@ const routes = createBrowserRouter([
 	},
 	{
 		path: "/carrinho",
-		element: <PrivateRoute component={<Cart />} />,
+		element: <Cart/>,
 	},
 	{
-		path: "/admin/criarProduto",
+		path: "/cadastrar_produto",
 		element: <PrivateRoute component={<RegisterProducts />} isAdminRequired={true} />,
 	},
 	{
-		path: "/admin/ListarPedidos",
+		path: "/visualizar_produto",
 		element: <PrivateRoute component={<ListOrders />} isAdminRequired={true} />,
 	},
 	{
-		// Página de erro de "Acesso Negado"
 		path: "/notfound",
 		element: <NotFound />,
 	},
 ]);
 
-// Função que gerencia o acesso às páginas, verificando o status de login e permissões
 function PrivateRoute({ component, isAdminRequired }) {
-	const user = JSON.parse(localStorage.getItem("user_logado")); // Verifica se o usuário está logado
+	const user = JSON.parse(localStorage.getItem("user_logado")); 
 
-	// Se não estiver logado, redireciona para a página de login
 	if (!user) {
 		return <Navigate to="/login" />;
 	}
 
-	// Se for uma página de admin e o usuário não for admin, redireciona para a página de erro
 	if (isAdminRequired && !user.isAdmin) {
 		return <Navigate to="/notfound" />;
 	}
 
-	// Se passar nas verificações, renderiza o componente e o ModAdmin (se for admin)
 	return (
 		<>
-			{/* Renderiza o ModAdmin apenas para administradores */}
-			{user.isAdmin && <ModAdmin />}
+			{user.isAdmin && <Admin />}
 			{component}
 		</>
 	);
